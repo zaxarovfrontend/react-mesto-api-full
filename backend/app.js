@@ -8,7 +8,7 @@ const NotFoundError = require('./errors/not-found-error');
 const { login, createUser } = require('./controllers/users');
 const {errorLogger} = require('./middlewares/logger');
 const auth = require('./middlewares/auth');
-const cors = require('./middlewares/cors');
+// const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
@@ -38,7 +38,7 @@ app.use(limiter);
 
 require('dotenv').config();
 
-app.use(cors);
+// app.use(cors);
 app.use(helmet());
 app.use('/', express.json());
 

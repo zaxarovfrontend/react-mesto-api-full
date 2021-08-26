@@ -15,12 +15,13 @@ export const register = (email, password) => {
     }).then((res) => checkRes(res))
 }
 
-export const authorization = (email, password) => {
+export const authorization = (email, password, token) => {
     return fetch(`${BASE_URL}/signin`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({email, password})
     }).then((res) => checkRes(res))
