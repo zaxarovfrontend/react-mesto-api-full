@@ -5,7 +5,7 @@ class Api {
     }
 
 
-    changeLikeCardStatus(id, isLiked, token) {
+    changeLikeCardStatus(id, isLiked) {
         if (isLiked) {
             return this.setLike(id);
         } else {
@@ -17,7 +17,7 @@ class Api {
     getUserInfo(token) {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers,
-
+            Authorization: `Bearer ${token}`
         })
             .then(this._checkRes)
 
@@ -27,7 +27,7 @@ class Api {
     getInitialCards(token) {
         return fetch(`${this._url}/cards`, {
             headers: this._headers,
-
+            Authorization: `Bearer ${token}`
         })
             .then(this._checkRes)
 
@@ -38,7 +38,7 @@ class Api {
         return fetch(`${this._url}/users/me`, {
             method: "PATCH",
             headers: this._headers,
-
+            Authorization: `Bearer ${token}`,
             body: JSON.stringify({
                 name: data.name,
                 about: data.about
@@ -51,7 +51,7 @@ class Api {
         return fetch(`${this._url}/cards`, {
             method: "POST",
             headers: this._headers,
-
+            Authorization: `Bearer ${token}`,
             body: JSON.stringify({
                 name: data.name,
                 link: data.link
@@ -64,7 +64,7 @@ class Api {
         return fetch(`${this._url}/cards/${cardId}`, {
             method: "DELETE",
             headers: this._headers,
-
+            Authorization: `Bearer ${token}`
         })
             .then(this._checkRes)
     }
@@ -85,7 +85,7 @@ class Api {
             {
                 method: 'DELETE',
                 headers: this._headers,
-
+                Authorization: `Bearer ${token}`
             })
             .then(this._checkRes)
     }
@@ -111,7 +111,7 @@ class Api {
 }
 
 const api = new Api({
-    url: `https://backend.nomoredomains.rocks`,
+    url: `http://localhost:3000`,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
