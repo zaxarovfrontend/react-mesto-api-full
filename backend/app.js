@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const express = require('express');
 const mongoose = require('mongoose');
 const crypto = require('crypto'); // экспортируем crypto
@@ -6,9 +7,8 @@ const rateLimit = require('express-rate-limit');
 const { errors, celebrate, Joi } = require('celebrate');
 const NotFoundError = require('./errors/not-found-error');
 const { login, createUser } = require('./controllers/users');
-const {errorLogger} = require('./middlewares/logger');
+const { errorLogger } = require('./middlewares/logger');
 const auth = require('./middlewares/auth');
-// const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 
@@ -22,7 +22,6 @@ const app = express();
 
 const usersRoute = require('./routes/users');
 const cardsRoute = require('./routes/card');
-
 
 const randomString = crypto
   .randomBytes(16) // сгенерируем случайную последовательность 16 байт (128 бит)
@@ -38,7 +37,6 @@ app.use(limiter);
 
 require('dotenv').config();
 
-// app.use(cors);
 app.use(helmet());
 app.use('/', express.json());
 
@@ -66,7 +64,6 @@ app.use('/', cardsRoute);
 app.all('*', (req, res, next) => {
   next(new NotFoundError('ресурс не найден.'));
 });
-
 
 app.use(errorLogger); // подключаем логгер ошибок
 

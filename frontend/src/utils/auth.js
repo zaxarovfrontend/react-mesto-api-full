@@ -21,7 +21,7 @@ export const authorization = (email, password, token) => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+
         },
         body: JSON.stringify({email, password})
     }).then((res) => checkRes(res))
@@ -33,7 +33,7 @@ export const checkToken = (token) => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+
         },
 
     }).then((res) => checkRes(res))

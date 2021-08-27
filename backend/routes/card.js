@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const router = require('express').Router();
 const { isURL } = require('validator');
 const { celebrate, Joi } = require('celebrate');
