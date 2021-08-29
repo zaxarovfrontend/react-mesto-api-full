@@ -135,7 +135,7 @@ class Api {
 }
 
 const api = new Api({
-    url: `http://backend.nomoredomains.rocks`,
+    url: `https://backend.nomoredomains.rocks`,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
