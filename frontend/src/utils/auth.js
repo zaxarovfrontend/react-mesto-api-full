@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://backend.nomoredomains.rocks/'
+export const BASE_URL = 'https://backend.nomoredomains.rocks'
 
 const checkRes = (res) => {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
