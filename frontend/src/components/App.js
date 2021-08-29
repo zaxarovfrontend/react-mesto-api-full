@@ -218,7 +218,7 @@ function App() {
                         <Login onLogin={login} onChekToken={checkToken}/>
                     </Route>
                     <Route>
-                        {loggedIn ? <Redirect to="/"/> : <Redirect to="signin"/>}
+                        {loggedIn ? <Redirect to="/"/> : <Redirect to="/signin"/>}
                     </Route>
 
                 </Switch>

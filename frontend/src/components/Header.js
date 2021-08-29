@@ -13,7 +13,7 @@ function Header(props) {
                 <>
                     <div className='header__container'>
                     <p className='header__email header__email-style'>{props.userEmail}</p>
-                    <Link className='header__signout header__email-style' to='signin' onClick ={props.onSignOut}>Выйти</Link>
+                    <Link className='header__signout header__email-style' to='/signin' onClick ={props.onSignOut}>Выйти</Link>
                     </div>
                 </>
                 ) : (
