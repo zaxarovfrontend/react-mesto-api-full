@@ -31,7 +31,26 @@ function App() {
     const [userEmail, setUserEmail] = React.useState('')
     const history = useHistory();
 
+    const checkToken = React.useCallback(() => {
+        const token = localStorage.getItem('token');
+        auth.checkToken(token).then(
+            (data) => {
+                setLoggedIn(true);
+                setUserEmail(data.data.email);
+                history.push('/my-profile');
+            })
+            .catch((err) => {
+                    console.log(err);
+                }
+            );
+    }, []);
 
+    React.useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            checkToken();
+        }
+    }, [checkToken]);
 
 
     //запрос данных пользователя
@@ -174,29 +193,6 @@ function App() {
         setLoggedIn(false);
         history.push('signin');
     }
-
-
-    const checkToken = React.useCallback(() => {
-        const token = localStorage.getItem('token');
-        auth.checkToken(token).then(
-            (data) => {
-                setLoggedIn(true);
-                setUserEmail(data.data.email);
-                history.push('/my-profile');
-            })
-            .catch((err) => {
-                    console.log(err);
-                }
-            );
-    }, []);
-
-    React.useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            checkToken();
-        }
-    }, [checkToken]);
-
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
