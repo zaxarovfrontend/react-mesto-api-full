@@ -5,18 +5,23 @@ class Api {
     }
 
 
-    changeLikeCardStatus(id, isLiked) {
+    changeLikeCardStatus(id, isLiked, token) {
         if (isLiked) {
-            return this.setLike(id);
+            return this.setLike(id, token);
         } else {
-            return this.removeLike(id);
+            return this.removeLike(id, token);
         }
     }
 
 //Получил информациб о профиле с сервера
     getUserInfo(token) {
         return fetch(`${this._url}/users/me`, {
-            headers: this._headers,
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+
         })
             .then(this._checkRes)
 
@@ -24,21 +29,25 @@ class Api {
 
 //Получил с сервера карточки
     getInitialCards(token) {
-        debugger
         return fetch(`${this._url}/cards`, {
-            headers: this._headers,
-            Authorization: `Bearer ${token}`
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
         })
             .then(this._checkRes)
-
     }
 
 //Добавил новую информацию о профиле на сервер
     editUserData(data, token) {
         return fetch(`${this._url}/users/me`, {
             method: "PATCH",
-            headers: this._headers,
-            Authorization: `Bearer ${token}`,
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
             body: JSON.stringify({
                 name: data.name,
                 about: data.about
@@ -50,8 +59,11 @@ class Api {
     addCard(data, token) {
         return fetch(`${this._url}/cards`, {
             method: "POST",
-            headers: this._headers,
-            Authorization: `Bearer ${token}`,
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
             body: JSON.stringify({
                 name: data.name,
                 link: data.link
@@ -63,8 +75,11 @@ class Api {
     cardDelete(cardId, token) {
         return fetch(`${this._url}/cards/${cardId}`, {
             method: "DELETE",
-            headers: this._headers,
-            Authorization: `Bearer ${token}`
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
         })
             .then(this._checkRes)
     }
@@ -74,8 +89,11 @@ class Api {
         return fetch(`${this._url}/cards/likes/${cardId}`,
             {
                 method: 'PUT',
-                headers: this._headers,
-                Authorization: `Bearer ${token}`
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
             })
             .then(this._checkRes)
     }
@@ -84,8 +102,11 @@ class Api {
         return fetch(`${this._url}/cards/likes/${cardId}`,
             {
                 method: 'DELETE',
-                headers: this._headers,
-                Authorization: `Bearer ${token}`
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
             })
             .then(this._checkRes)
     }
@@ -93,8 +114,11 @@ class Api {
     updateAvatar(data, token) {
         return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
-            headers: this._headers,
-            Authorization: `Bearer ${token}`,
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
             body: JSON.stringify({
                 avatar: data.avatar,
             })

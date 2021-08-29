@@ -18,7 +18,6 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 
 function App() {
-    //const [token, setToken] = React.useState('');
     const [currentUser, setCurrentUser] = React.useState({});
     const [cards, setCards] = React.useState([])
     const [selectedCard, setSelectedCard] = React.useState(null);
@@ -37,7 +36,8 @@ function App() {
 
     //запрос данных пользователя
     React.useEffect(() => {
-        api.getUserInfo(localStorage.token)
+        const token = localStorage.getItem('token');
+        api.getUserInfo(token)
             .then((data) => {
                 setCurrentUser(data)
             })
@@ -47,7 +47,8 @@ function App() {
 
     //запрос карточек
     React.useEffect(() => {
-        api.getInitialCards(localStorage.token)
+        const token = localStorage.getItem('token');
+        api.getInitialCards(token)
             .then((data) => {
                 setCards(data)
             })
@@ -99,7 +100,7 @@ function App() {
 
     //функция запроса удаления карточек
     function handleCardDelete(card) {
-        api.cardDelete(card._id, localStorage.token)
+        api.cardDelete(card._id,localStorage.token)
             .then(() => {
                 setCards((state) => state.filter((c) => c !== card))
             })
@@ -171,8 +172,7 @@ function App() {
     function signOut() {
         localStorage.removeItem("token");
         setLoggedIn(false);
-        history.push('sign-in');
-        //setToken('');
+        history.push('signin');
     }
 
 
