@@ -17,7 +17,6 @@ class Api {
     getUserInfo(token) {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers,
-            Authorization: `Bearer ${token}`
         })
             .then(this._checkRes)
 
@@ -25,6 +24,7 @@ class Api {
 
 //Получил с сервера карточки
     getInitialCards(token) {
+        debugger
         return fetch(`${this._url}/cards`, {
             headers: this._headers,
             Authorization: `Bearer ${token}`

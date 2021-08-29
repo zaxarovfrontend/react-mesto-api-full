@@ -18,6 +18,7 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 
 function App() {
+    //const [token, setToken] = React.useState('');
     const [currentUser, setCurrentUser] = React.useState({});
     const [cards, setCards] = React.useState([])
     const [selectedCard, setSelectedCard] = React.useState(null);
@@ -31,9 +32,12 @@ function App() {
     const [userEmail, setUserEmail] = React.useState('')
     const history = useHistory();
 
+
+
+
     //запрос данных пользователя
     React.useEffect(() => {
-        api.getUserInfo()
+        api.getUserInfo(localStorage.token)
             .then((data) => {
                 setCurrentUser(data)
             })
@@ -43,7 +47,7 @@ function App() {
 
     //запрос карточек
     React.useEffect(() => {
-        api.getInitialCards()
+        api.getInitialCards(localStorage.token)
             .then((data) => {
                 setCards(data)
             })
@@ -85,7 +89,7 @@ function App() {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
-        api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+        api.changeLikeCardStatus(card._id, !isLiked, localStorage.token).then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
         })
             .catch((err) => {
@@ -95,7 +99,7 @@ function App() {
 
     //функция запроса удаления карточек
     function handleCardDelete(card) {
-        api.cardDelete(card._id)
+        api.cardDelete(card._id, localStorage.token)
             .then(() => {
                 setCards((state) => state.filter((c) => c !== card))
             })
@@ -105,7 +109,7 @@ function App() {
     }
 
     function handleUpdateUser(data) {
-        api.editUserData(data)
+        api.editUserData(data, localStorage.token)
             .then((data) => {
                 setCurrentUser(data);
                 closeAllPopups();
@@ -116,7 +120,7 @@ function App() {
     }
 
     function handleUpdateAvatar(data) {
-        api.updateAvatar(data)
+        api.updateAvatar(data, localStorage.token)
             .then((data) => {
                 setCurrentUser(data);
                 closeAllPopups();
@@ -127,7 +131,7 @@ function App() {
     }
 
     function handleAddPlaceSubmit(data) {
-        api.addCard(data)
+        api.addCard(data,localStorage.token)
             .then((newCard) => {
                 setCards([newCard, ...cards]);
                 closeAllPopups()
@@ -144,7 +148,7 @@ function App() {
                 handleInfoTooltipPopupOpen()
                 history.push('/');
             })
-            .catch((err) => {
+            .catch(() => {
                 setIsSuccess(false)
                 handleInfoTooltipPopupOpen()
             })
@@ -168,6 +172,7 @@ function App() {
         localStorage.removeItem("token");
         setLoggedIn(false);
         history.push('sign-in');
+        //setToken('');
     }
 
 
