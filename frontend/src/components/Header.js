@@ -13,13 +13,13 @@ function Header(props) {
                 <>
                     <div className='header__container'>
                     <p className='header__email header__email-style'>{props.userEmail}</p>
-                    <Link className='header__signout header__email-style' to='sign-in' onClick ={props.onSignOut}>Выйти</Link>
+                    <Link className='header__signout header__email-style' to='signin' onClick ={props.onSignOut}>Выйти</Link>
                     </div>
                 </>
                 ) : (
                 <Link className='header__sign header__email-style'
-                      to={`${location.pathname === '/sign-in' ? '/sign-up' : '/sign-in'}`}>
-                    {`${location.pathname === '/sign-in' ? 'Регистрация' : 'Войти' }`}
+                      to={`${location.pathname === '/signin' ? '/signup' : '/signin'}`}>
+                    {`${location.pathname === '/signin' ? 'Регистрация' : 'Войти' }`}
                 </Link>
                 )}
 

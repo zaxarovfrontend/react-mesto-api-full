@@ -29,7 +29,7 @@ const[email, setEmail] = React.useState('')
                        name='password'
                        value={password} onChange={changePassword} placeholder='Пароль' required/>
                 <button className='login__button' type='submit'>Зарегистрироваться</button>
-                <Link className='login__question' to='/sign-in'>Уже зарегистрированы?Войти</Link>
+                <Link className='login__question' to='/signin'>Уже зарегистрированы?Войти</Link>
             </form>
         </div>
     );
