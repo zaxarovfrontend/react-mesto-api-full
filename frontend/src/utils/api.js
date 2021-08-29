@@ -135,9 +135,8 @@ class Api {
 }
 
 const api = new Api({
-    url: `https://backend.nomoredomains.rocks`,
+    url: `http://localhost:3000`,
     headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
 });
