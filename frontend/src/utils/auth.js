@@ -1,5 +1,5 @@
 export const BASE_URL = 'https://backend.nomoredomains.rocks'
-
+// export const BASE_URL = 'http://localhost:3000'
 const checkRes = (res) => {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
 }

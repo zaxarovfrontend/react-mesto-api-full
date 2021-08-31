@@ -7,6 +7,7 @@ function Header(props) {
 
     return (
         <header className="header">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a href="#" target="_blank" rel="noopener"><img className="header__logo hover" src={logo}
                                                                 alt="логотип"/></a>
                 {props.loggedIn ? (

@@ -33,17 +33,18 @@ function App() {
 
     const checkToken = React.useCallback(() => {
         const token = localStorage.getItem('token');
+        console.log(token)
         auth.checkToken(token).then(
             (data) => {
                 setLoggedIn(true);
-                setUserEmail(data.data.email);
+                setUserEmail(data.email);
                 history.push('/my-profile');
             })
             .catch((err) => {
                     console.log(err);
                 }
             );
-    }, []);
+    }, [history]);
 
     React.useEffect(() => {
         const token = localStorage.getItem('token');
@@ -242,3 +243,4 @@ function App() {
 }
 
 export default App;
+

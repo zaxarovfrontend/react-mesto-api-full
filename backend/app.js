@@ -5,7 +5,7 @@ const crypto = require('crypto'); // экспортируем crypto
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { errors, celebrate, Joi } = require('celebrate');
-const cors = require('cors');
+// const cors = require('cors');
 const NotFoundError = require('./errors/not-found-error');
 const { login, createUser } = require('./controllers/users');
 const { errorLogger } = require('./middlewares/logger');
@@ -33,7 +33,7 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // за 15 минут
   max: 100, // можно совершить максимум 100 запросов с одного IP
 });
-
+// Для запуска на локальном
 // app.use(cors());
 // app.options('*', cors());
 
@@ -44,11 +44,11 @@ require('dotenv').config();
 app.use(helmet());
 app.use('/', express.json());
 
-// app.get('/crash-test', () => {
-//   setTimeout(() => {
-//     throw new Error('Сервер сейчас упадёт');
-//   }, 0);
-// });
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({

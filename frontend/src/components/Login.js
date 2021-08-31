@@ -20,14 +20,13 @@ function Login(props) {
 
     return(
         <div className='login'>
-        
             <form className='login__form' onSubmit={handleSubmit}>
             <h1 className='login__title' >Вход</h1>
                 <input className='login__input' type='email' name='email'
-                       value={email} onChange={changeEmail} placeholder='Email' required/>
+                       value={email || ''} onChange={changeEmail} placeholder='Email' required/>
                     <input className='login__input'
                            type='password' name='password'
-                           value={password} onChange={changePassword} placeholder='Пароль' required/>
+                           value={password || ''} onChange={changePassword} placeholder='Пароль' required/>
                         <button className='login__button' type='submit'>Войти</button>
             </form>
         </div>
